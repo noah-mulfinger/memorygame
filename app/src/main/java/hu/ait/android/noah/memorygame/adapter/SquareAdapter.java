@@ -11,7 +11,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import hu.ait.android.noah.memorygame.R;
 import hu.ait.android.noah.memorygame.data.Square;
@@ -26,6 +29,18 @@ public class SquareAdapter extends BaseAdapter {
     public SquareAdapter(Context context, List<Square> squares) {
         this.context = context;
         this.squares = squares;
+
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            list.add(i);
+            list.add(i);
+        }
+        Collections.shuffle(list);
+
+        for(int i = 0; i < 16; i++) {
+            squares.add(new Square(
+                    Square.SquareType.fromInt(list.get(i))));
+        }
     }
 
     public int getCount() {
@@ -76,6 +91,10 @@ public class SquareAdapter extends BaseAdapter {
 
         }
         return v;
+    }
+
+    public void testMethod() {
+
     }
 
 

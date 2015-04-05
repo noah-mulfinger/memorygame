@@ -9,9 +9,14 @@ public class Square {
 
 
     public enum SquareType {
-        BLACK(-1, R.drawable.black),
         GREEN(0, R.drawable.green),
-        ORANGE(1, R.drawable.orange);
+        ORANGE(1, R.drawable.orange),
+        RED(2, R.drawable.red),
+        BLUE(3, R.drawable.blue),
+        PINK(4, R.drawable.pink),
+        PURPLE(5, R.drawable.purple),
+        BROWN(6, R.drawable.brown),
+        YELLOW(7, R.drawable.yellow);
 
         private int value;
         private int iconId;
@@ -41,7 +46,7 @@ public class Square {
     }
 
     private SquareType squareType;
-    private boolean revealed = false;
+    private boolean revealed = true;
 
     public Square(SquareType squareType) {
         this.squareType = squareType;

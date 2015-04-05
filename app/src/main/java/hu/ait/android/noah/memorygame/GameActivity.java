@@ -16,6 +16,7 @@ import java.util.Random;
 
 import hu.ait.android.noah.memorygame.adapter.SquareAdapter;
 import hu.ait.android.noah.memorygame.data.Square;
+import hu.ait.android.noah.memorygame.view.GameView;
 
 
 public class GameActivity extends ActionBarActivity {
@@ -28,66 +29,8 @@ public class GameActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        final List<Square> squares = new ArrayList<>();
 
-        Random random = new Random();
-
-        for(int i = 0; i < 16; i++) {
-            squares.add(new Square(
-                    Square.SquareType.fromInt(random.nextInt(2))));
-        }
-
-        final GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setColumnWidth(gridview.getWidth() / 4);
-        gridview.setNumColumns(4);
-        gridview.setAdapter(new SquareAdapter(this, squares));
-
-
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-
-                ((Square) gridview.getAdapter().
-                        getItem(position)).setRevealed(true);
-                ((SquareAdapter)gridview.getAdapter()).
-                        notifyDataSetChanged();
-
-                if (previousPosition != -1) {
-                    if (((Square) gridview.getAdapter().
-                            getItem(previousPosition)).getSquareType()
-                            == ((Square) gridview.getAdapter().
-                            getItem(position)).getSquareType()) {
-                        Toast.makeText(GameActivity.this, "Match",
-                                Toast.LENGTH_SHORT).show();
-                        previousPosition = -1;
-                        Log.d("tag_", "match");
-                    } else {
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        ((Square) gridview.getAdapter().
-                                getItem(position)).setRevealed(false);
-                        ((Square) gridview.getAdapter().
-                                getItem(previousPosition)).setRevealed(false);
-
-
-                        Toast.makeText(GameActivity.this, "No match",
-                                Toast.LENGTH_SHORT).show();
-                        previousPosition = -1;
-
-                    }
-
-                } else {
-                    previousPosition = position;
-
-                }
-
-                ((SquareAdapter)gridview.getAdapter()).
-                        notifyDataSetChanged();
-            }
-        });
+        final GameView gameView = (GameView) findViewById(R.id.gameView);
 
     }
 
