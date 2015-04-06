@@ -46,7 +46,7 @@ public class Square {
     }
 
     private SquareType squareType;
-    private boolean revealed = true;
+    private boolean revealed = false;
 
     public Square(SquareType squareType) {
         this.squareType = squareType;
@@ -60,8 +60,12 @@ public class Square {
         this.squareType = squareType;
     }
 
-    public void setRevealed(boolean revealed) {
-        this.revealed = revealed;
+    public void revealSquare() {
+        revealed = true;
+    }
+
+    public void hideSquare() {
+        revealed = false;
     }
 
     public boolean isRevealed() {
