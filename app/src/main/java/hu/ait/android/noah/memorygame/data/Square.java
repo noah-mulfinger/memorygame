@@ -16,10 +16,22 @@ public class Square {
         PINK(4, R.drawable.pink),
         PURPLE(5, R.drawable.purple),
         BROWN(6, R.drawable.brown),
-        YELLOW(7, R.drawable.yellow);
+        YELLOW(7, R.drawable.yellow),
+        GREENOUTLINE(8, R.drawable.green_outline),
+        ORANGEOUTLINE(9, R.drawable.orange_outline),
+        REDOUTLINE(10, R.drawable.red_outline),
+        BLUEOUTLINE(11, R.drawable.blue_outline),
+        PINKOUTLINE(12, R.drawable.pink_outline),
+        PURPLEOUTLINE(13, R.drawable.purple_outline),
+        BROWNOUTLINE(14, R.drawable.brown_outline),
+        YELLOWOUTLINE(15, R.drawable.yellow_outline),
+        GREENBLUE(16, R.drawable.green_blue),
+        YELLOWRED(17, R.drawable.yellow_red);
+
 
         private int value;
         private int iconId;
+
 
         private SquareType(int value, int iconId) {
             this.value = value;
@@ -47,6 +59,7 @@ public class Square {
 
     private SquareType squareType;
     private boolean revealed = false;
+    private boolean animate = false;
 
     public Square(SquareType squareType) {
         this.squareType = squareType;
@@ -70,5 +83,17 @@ public class Square {
 
     public boolean isRevealed() {
         return revealed;
+    }
+
+    public void requireAnim() {
+        animate = true;
+    }
+
+    public void noAnimRequired() {
+        animate = false;
+    }
+
+    public boolean needsAnimation() {
+        return animate;
     }
 }

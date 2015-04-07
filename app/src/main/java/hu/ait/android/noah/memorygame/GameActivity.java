@@ -1,6 +1,9 @@
 package hu.ait.android.noah.memorygame;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,40 +30,54 @@ public class GameActivity extends ActionBarActivity {
 
 
     private ProgressBar progressBar;
+    private GameFragment gameFragment;
+    private int difficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        difficulty = (int)getIntent().getExtras().get("key_difficulty");
+
+
 //        if (savedInstanceState == null) {
 //            getFragmentManager()
 //                    .beginTransaction()
-//                    .add(R.id.container, new CardFrontFragment())
+//                    .add(R.
+//
+// id.container, new CardFrontFragment())
 //                    .commit();
 //        }
 
-        final GridView gridView = (GridView) findViewById(R.id.gridView);
-
-        gridView.setColumnWidth(gridView.getWidth() / 4);
-        gridView.setNumColumns(4);
-        gridView.setAdapter(new SquareAdapter(this, new ArrayList<Square>()));
-
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((SquareAdapter)gridView.getAdapter()).handleItemClick(position);
-                //flipCard();
-            }
-        });
+       showFragment(GameFragment.TAG);
 
         progressBar = (ProgressBar) findViewById(R.id.progress);
-        progressBar.setMax(8);
+        progressBar.setMax(SquareAdapter.Difficulty.fromInt(difficulty).getTotalSquares()/2);
         progressBar.setProgress(0);
 
 
     }
+
+    private void showFragment(String fragmentTag) {
+        if (GameFragment.TAG.equals(fragmentTag)) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            gameFragment = new GameFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("key_difficulty", difficulty);
+            gameFragment.setArguments(bundle);
+
+            fragmentTransaction.replace(R.id.layoutContainer, gameFragment, GameFragment.TAG);
+
+            fragmentTransaction.commit();
+        }
+    }
+
+
+
+
 
     public void increaseProgress() {
         progressBar.incrementProgressBy(1);

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="key_name"
+        android:selectAllOnFocus="true"
+        android:title="Name"
+        android:dialogTitle="Enter Name"
+        android:defaultValue="User"/>
+
+    <EditTextPreference
+        android:key="key_age"
+        android:selectAllOnFocus="true"
+        android:title="Age"
+        android:inputType="number"
+        android:dialogTitle="Select Age"
+        android:defaultValue="0"/>
+
+    <ListPreference
+        android:key="key_gender"
+        android:title="Gender"
+        android:dialogTitle="Select Gender"
+        android:entries="@array/gender_array"
+        android:entryValues="@array/gender_values_array"
+        android:defaultValue="0"
+        android:summary="%s"/>
+
+
+
+</PreferenceScreen>
